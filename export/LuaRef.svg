@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="600"
+   height="800"
+   viewBox="0 0 158.75 211.66667"
+   version="1.1"
+   id="svg5"
+   sodipodi:docname="LuaRef.svg"
+   inkscape:version="1.2.2 (732a01da63, 2022-12-09)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview7"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="mm"
+     showgrid="true"
+     inkscape:zoom="1.8897845"
+     inkscape:cx="325.16935"
+     inkscape:cy="216.95595"
+     inkscape:window-width="1777"
+     inkscape:window-height="1103"
+     inkscape:window-x="353"
+     inkscape:window-y="136"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="layer1">
+    <inkscape:grid
+       type="xygrid"
+       id="grid9"
+       spacingx="3.3072917"
+       spacingy="3.3072917"
+       empspacing="4"
+       visible="true"
+       dotted="true"
+       enabled="true" />
+  </sodipodi:namedview>
+  <defs
+     id="defs2">
+    <marker
+       style="overflow:visible"
+       id="marker1464"
+       refX="0"
+       refY="0"
+       orient="auto-start-reverse"
+       inkscape:stockid="Arrow1"
+       markerWidth="4.0606604"
+       markerHeight="6.7071066"
+       viewBox="0 0 4.0606602 6.7071068"
+       inkscape:isstock="true"
+       inkscape:collect="always"
+       preserveAspectRatio="xMidYMid">
+      <path
+         style="fill:none;stroke:context-stroke;stroke-width:1;stroke-linecap:butt"
+         d="M 3,-3 0,0 3,3"
+         id="path1462"
+         transform="rotate(180,0.125,0)"
+         sodipodi:nodetypes="ccc" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="Arrow1"
+       refX="0"
+       refY="0"
+       orient="auto-start-reverse"
+       inkscape:stockid="Arrow1"
+       markerWidth="4.0606604"
+       markerHeight="6.7071066"
+       viewBox="0 0 4.0606602 6.7071068"
+       inkscape:isstock="true"
+       inkscape:collect="always"
+       preserveAspectRatio="xMidYMid">
+      <path
+         style="fill:none;stroke:context-stroke;stroke-width:1;stroke-linecap:butt"
+         d="M 3,-3 0,0 3,3"
+         id="path5057"
+         transform="rotate(180,0.125,0)"
+         sodipodi:nodetypes="ccc" />
+    </marker>
+    <rect
+       x="198.43532"
+       y="99.482241"
+       width="170.38979"
+       height="50.799442"
+       id="rect125" />
+    <rect
+       x="191.02707"
+       y="91.544828"
+       width="222.77672"
+       height="66.674268"
+       id="rect115" />
+  </defs>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <text
+       xml:space="preserve"
+       transform="scale(0.26458333)"
+       id="text113"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'Ubuntu Condensed SemiItalic';-inkscape-font-specification:'Ubuntu Condensed SemiItalic';white-space:pre;shape-inside:url(#rect115);display:inline;fill:#000000" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:3.175px;font-family:'Ubuntu Condensed SemiItalic';-inkscape-font-specification:'Ubuntu Condensed SemiItalic';fill:#000000;stroke-width:0.264583"
+       x="64.123268"
+       y="31.641613"
+       id="text121"><tspan
+         sodipodi:role="line"
+         id="tspan119"
+         style="stroke-width:0.264583"
+         x="64.123268"
+         y="31.641613" /></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:5.29166667px;font-family:'Ubuntu Condensed SemiItalic';-inkscape-font-specification:'Ubuntu Condensed SemiItalic';text-align:center;text-anchor:middle;fill:#000000;stroke-width:0.264583"
+       x="79.375"
+       y="19.84375"
+       id="text289"><tspan
+         sodipodi:role="line"
+         id="tspan287"
+         style="stroke-width:0.264583;font-size:5.29166667px"
+         x="79.375"
+         y="19.84375">luaToGML</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:5.29167px;font-family:'Ubuntu Condensed SemiItalic';-inkscape-font-specification:'Ubuntu Condensed SemiItalic';text-align:center;text-anchor:middle;fill:#000000;stroke-width:0.264583"
+       x="79.375"
+       y="33.072918"
+       id="text293"><tspan
+         sodipodi:role="line"
+         id="tspan291"
+         style="font-size:5.29167px;stroke-width:0.264583"
+         x="79.375"
+         y="33.072918">createLuaRef</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:5.29167px;font-family:'Ubuntu Condensed SemiItalic';-inkscape-font-specification:'Ubuntu Condensed SemiItalic';text-align:center;text-anchor:middle;fill:#000000;stroke-width:0.264583"
+       x="132.29167"
+       y="46.302082"
+       id="text297"><tspan
+         sodipodi:role="line"
+         id="tspan295"
+         style="font-size:5.29167px;stroke-width:0.264583"
+         x="132.29167"
+         y="46.302082">__apollo_ref_to_rvalue</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:5.29167px;font-family:'Ubuntu Condensed SemiItalic';-inkscape-font-specification:'Ubuntu Condensed SemiItalic';text-align:center;text-anchor:middle;fill:#000000;stroke-width:0.264583"
+       x="77.290398"
+       y="58.552292"
+       id="text318"><tspan
+         sodipodi:role="line"
+         id="tspan316"
+         style="font-size:5.29167px;stroke-width:0.264583"
+         x="77.290398"
+         y="58.552292">createLuaRefStruct</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:5.29167px;font-family:'Ubuntu Condensed SemiItalic';-inkscape-font-specification:'Ubuntu Condensed SemiItalic';text-align:center;text-anchor:middle;fill:#000000;stroke-width:0.264583"
+       x="26.458334"
+       y="72.760414"
+       id="text322"><tspan
+         sodipodi:role="line"
+         id="tspan320"
+         style="font-size:5.29167px;stroke-width:0.264583"
+         x="26.458334"
+         y="72.760414">lua_ref_create_raw</tspan></text>
+    <path
+       style="fill:none;stroke:#c4c4c4;stroke-width:0.529167;stroke-dasharray:none;stroke-opacity:1;marker-start:url(#Arrow1)"
+       d="m 26.458334,66.145834 c 0,-9.921875 13.229166,-9.921875 29.765625,-9.921875"
+       id="path387"
+       sodipodi:nodetypes="cc" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:4.23333333px;font-family:'Ubuntu Condensed SemiItalic';-inkscape-font-specification:'Ubuntu Condensed SemiItalic';text-align:center;text-anchor:middle;fill:#000000;stroke-width:0.264583"
+       id="text1389"><textPath
+         xlink:href="#path387"
+         startOffset="50%"
+         id="textPath1393"><tspan
+           id="tspan1387"
+           style="stroke-width:0.264583;font-size:4.23333333px">LuaState, uid</tspan></textPath></text>
+    <path
+       style="fill:none;stroke:#c4c4c4;stroke-width:0.529;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#marker1464);font-variation-settings:normal;opacity:1;fill-opacity:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dashoffset:0;marker-start:;stop-color:#000000;stop-opacity:1"
+       d="m 46.302084,72.760417 c 19.84375,0 33.072917,0 33.072917,-9.921875"
+       id="path1434"
+       sodipodi:nodetypes="cc" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:4.23333333px;font-family:'Ubuntu Condensed SemiItalic';-inkscape-font-specification:'Ubuntu Condensed SemiItalic';text-align:center;text-anchor:middle;fill:#000000;stroke-width:0.264583"
+       id="text1440"><textPath
+         xlink:href="#path1434"
+         startOffset="50%"
+         id="textPath1453">LuaRef<tspan
+   id="tspan1436"
+   style="stroke-width:0.264583;font-size:4.23333333px" /></textPath></text>
+    <path
+       style="fill:none;stroke:#c4c4c4;stroke-width:0.529167;stroke-dasharray:none;stroke-opacity:1;marker-start:url(#Arrow1);font-variation-settings:normal;opacity:1;vector-effect:none;fill-opacity:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dashoffset:0;-inkscape-stroke:none;stop-color:#000000;stop-opacity:1"
+       d="m 132.29167,39.6875 c 0,-9.921875 -19.84375,-9.921875 -36.380211,-9.921875"
+       id="path2297"
+       sodipodi:nodetypes="cc" />
+    <path
+       style="fill:none;stroke:#c4c4c4;stroke-width:0.529167;stroke-dasharray:none;stroke-opacity:1;marker-start:url(#Arrow1);font-variation-settings:normal;opacity:1;vector-effect:none;fill-opacity:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dashoffset:0;-inkscape-stroke:none;stop-color:#000000;stop-opacity:1"
+       d="m 79.375001,52.916667 c 0,-9.921875 13.229167,-9.921875 29.765629,-9.921875"
+       id="path2299"
+       sodipodi:nodetypes="cc" />
+    <path
+       style="fill:none;stroke:#c4c4c4;stroke-width:0.529167;stroke-dasharray:none;stroke-opacity:1;marker-start:url(#Arrow1);font-variation-settings:normal;opacity:1;vector-effect:none;fill-opacity:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dashoffset:0;-inkscape-stroke:none;stop-color:#000000;stop-opacity:1"
+       d="m 79.375001,26.458334 0,-3.307292"
+       id="path2301"
+       sodipodi:nodetypes="cc" />
+    <path
+       style="font-variation-settings:normal;opacity:1;fill:none;fill-opacity:1;stroke:#c4c4c4;stroke-width:0.529;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;marker-end:url(#marker1464);stop-color:#000000;stop-opacity:1"
+       d="m 99.218751,56.223959 c 15.003199,-0.506309 26.458329,0 29.765629,-6.614584"
+       id="path2520"
+       sodipodi:nodetypes="cc" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:4.23333px;font-family:'Ubuntu Condensed SemiItalic';-inkscape-font-specification:'Ubuntu Condensed SemiItalic';text-align:center;text-anchor:middle;fill:#000000;stroke-width:0.264583"
+       id="text2530"><textPath
+         xlink:href="#path2520"
+         startOffset="50%"
+         id="textPath2636">RValuePtr</textPath></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:5.29167px;font-family:'Ubuntu Condensed SemiItalic';-inkscape-font-specification:'Ubuntu Condensed SemiItalic';text-align:start;text-anchor:start;fill:#000000;stroke-width:0.264583"
+       x="6.1757054"
+       y="9.8424997"
+       id="text902"><tspan
+         sodipodi:role="line"
+         id="tspan900"
+         style="font-size:5.29167px;text-align:start;text-anchor:start;stroke-width:0.264583"
+         x="6.1757054"
+         y="9.8424997">Oh no</tspan></text>
+  </g>
+</svg>

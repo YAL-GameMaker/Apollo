@@ -1,0 +1,25 @@
+.vs/
+*/#backups/*
+*/Configs/*/*
+
+Lua/*
+!Lua/Put your Lua source files here.txt
+
+*/extensions/*/*.cpp
+*/extensions/*/*.dll
+*/datafiles/Apollo.html
+autogen.cpp
+autogen.gml
+
+*/Debug/
+*/Release/
+Debug/
+Release/
+x64/
+export/*.yyz
+export/*.yymps
+export/*.png
+export/*.zip
+
+*.sdf
+help.rtf

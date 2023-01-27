@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+<svg width="160" height="160" version="1.1" viewBox="0 0 160 160" xmlns="http://www.w3.org/2000/svg" xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:xlink="http://www.w3.org/1999/xlink">
+ <defs>
+  <radialGradient id="radialGradient4236" cx="-104.29" cy="916.95" r="62.758" gradientTransform="matrix(1.2269 .095605 -.038446 .49339 36.213 453.91)" gradientUnits="userSpaceOnUse">
+   <stop stop-color="#fff" stop-opacity="0" offset="0"/>
+   <stop stop-color="#fff" offset="1"/>
+  </radialGradient>
+ </defs>
+ <metadata>
+  <rdf:RDF>
+   <cc:Work rdf:about="">
+    <dc:format>image/svg+xml</dc:format>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+   </cc:Work>
+  </rdf:RDF>
+ </metadata>
+ <g transform="translate(0 -852.36)" shape-rendering="auto">
+  <path d="m80 882.36a50 50 0 0 0-50 50 50 50 0 0 0 50 50 50 50 0 0 0 50-50 50 50 0 0 0-50-50zm21 14a15 15 0 0 1 15 15 15 15 0 0 1-15 15 15 15 0 0 1-15-15 15 15 0 0 1 15-15z" color="#000000" color-rendering="auto" fill="#fff" image-rendering="auto" opacity=".32" solid-color="#000000" style="isolation:auto;mix-blend-mode:normal"/>
+  <circle cx="130.5" cy="881.86" r="14.5" color="#000000" color-rendering="auto" fill="#fff" image-rendering="auto" opacity=".32" solid-color="#000000" style="isolation:auto;mix-blend-mode:normal"/>
+  <path transform="matrix(-1 0 0 1 -20 -10)" d="m-126.46 896.53c25.309-16.254 59.679-7.6798 75.648 17.43 17.257 27.134 8.0326 63.87-18.9 80.861-28.911 18.239-67.958 8.3814-85.946-20.328-10.184-16.254-12.551-36.624-6.6166-54.837" color="#000000" color-rendering="auto" fill="none" image-rendering="auto" opacity=".125" solid-color="#000000" stroke="url(#radialGradient4236)" stroke-dasharray="8, 8" stroke-dashoffset="1" stroke-linecap="round" stroke-width="2" style="isolation:auto;mix-blend-mode:normal"/>
+  <path d="m138.59 898.54c-1.147 3.2327-1.0386 6.9316 0.77148 11.26l-1.2383 3.2793c2.9034 1.0336 2.088 1.6275 3.2656 2.9688 0.0143-1.7311-0.80981-3.5928 1.4219-4.4883 2.3326-0.58417 2.758 1.4074 3.7852 2.8008 0.16673-1.7771-0.8444-1.7798 0.90039-4.3203l-2.9258-1.9277c-1.0735-4.567-3.155-7.6274-5.9805-9.5723z" color="#000000" color-rendering="auto" fill="#fff" fill-opacity=".32" image-rendering="auto" solid-color="#000000" style="isolation:auto;mix-blend-mode:normal"/>
+ </g>
+</svg>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  @author YellowAfterlife
+  This teaches Visual Studio debugger how to show GML values correctly!
+-->
+<AutoVisualizer xmlns="http://schemas.microsoft.com/vstudio/debugger/natvis/2010">
+  <Type Name="RValue">
+    <DisplayString Condition="(kind &amp; 0x0ffffff) == 0">{real} (real)</DisplayString>
+    <DisplayString Condition="(kind &amp; 0x0ffffff) == 1">{str->text,s8} (string)</DisplayString>
+    <DisplayString Condition="(kind &amp; 0x0ffffff) == 2">array[]</DisplayString>
+    <DisplayString Condition="(kind &amp; 0x0ffffff) == 3">{ptr} (ptr)</DisplayString>
+    <DisplayString Condition="(kind &amp; 0x0ffffff) == 5">undefined</DisplayString>
+    <DisplayString Condition="(kind &amp; 0x0ffffff) == 6">{ptr} (object)</DisplayString>
+    <DisplayString Condition="(kind &amp; 0x0ffffff) == 7">{v32} (int32)</DisplayString>
+    <DisplayString Condition="(kind &amp; 0x0ffffff) == 15">{v32} (ref)</DisplayString>
+    <DisplayString Condition="(kind &amp; 0x0ffffff) == 10">{v64} (int64)</DisplayString>
+    <DisplayString Condition="(kind &amp; 0x0ffffff) == 13 &amp;&amp; real &gt; 0.5">true</DisplayString>
+    <DisplayString Condition="(kind &amp; 0x0ffffff) == 13 &amp;&amp; real &lt;= 0.5">false</DisplayString>
+    <DisplayString Condition="(kind &amp; 0x0ffffff) == 0x0ffffff">unset</DisplayString>
+    <Expand>
+      <Item Name="Hexadecimal" Condition="(kind &amp; 0x0ffffff) == 10">v64,x</Item>
+      <Item Name="Hexadecimal" Condition="(kind &amp; 0x0ffffff) == 7">v32,x</Item>
+    </Expand>
+  </Type>
+</AutoVisualizer>

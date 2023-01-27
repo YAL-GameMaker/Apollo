@@ -1,0 +1,13 @@
+{
+    "indentWithTabs": true,
+    "linterPrefs": {
+        "specTypeInst": true,
+        "specTypeInstSubTopLevel": true,
+        "specTypeVar": true
+    },
+    "rawDirectories": [
+        ".",
+        "..\/export\/Apollo.dmd"
+    ],
+    "templateStringScript": "sfmt"
+}

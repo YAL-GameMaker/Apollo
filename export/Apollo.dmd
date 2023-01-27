@@ -1,0 +1,208 @@
+```set template default.html```
+```set title Apollo cheat sheet```
+```set autoapi ext```
+```gmlapi fnames2```
+```set intro
+This is a "cheat sheet" for the "Apollo" extension (v3) by YellowAfterlife.\
+The extension can be found on
+[itch.io](https://yellowafterlife.itch.io/gamemaker-lua).
+```
+```exec
+function seeChap(_id) {
+	return render('(see [§' + _id + '](https://www.lua.org/manual/5.4/manual.html#' + _id + '))');
+}
+function seeDoc(_id) {
+	return render('(see [' + _id + '](https://www.lua.org/manual/5.4/manual.html#pdf-' + _id + '))');
+}
+
+var svg = File.getContent("thumb-doc-opt.svg");
+var b64 = Base64.encode(Bytes.ofString(svg)).toString();
+return ["<style>.main { ",
+"	background-repeat: no-repeat;"
+"	background-position: top right;"
+"	background-attachment: fixed;"
+"	background-image: url(data:image/svg+xml;base64," + b64 + ");",
+"}</style>"].join("\n");
+```
+
+#[Lua states](+LuaState) {
+	Lua states are now represented as structs!
+	
+	To create a Lua state, you do `state = new LuaState()` and it exists while it's being referenced.
+	
+	It has the following methods:
+	
+	#[toString()->](-) {
+		Returns a short, unique string representation of the state.
+		
+		It'll usually look like this:
+		```text
+		LuaState(ptr:000000000474BEF0)
+		```
+	}
+	Adding code:
+	#[addCode(code)->](-) {
+		Compiles and executes a snippet of Lua code ${seeDoc("luaL_dostring")}.
+		
+		If the code uses `return` statement, returns the first value.
+		
+		For example, doing
+		```gml
+		var state = new LuaState();
+		state.addCode(@'
+			print("Hello world!");
+		');
+		```
+		would print "Hello world!" into GameMaker's Output panel.
+	}
+	#[addCodeMultRet(code)->array](-) {
+		Like `addCode`, but packs multiple returned values into an array ${seeChap("3.3.4")}.
+	}
+	Working with globals:
+	#[get(name)->](-) {
+		Retrieves a global variable by a name.
+		
+		For tables and other reference types, this returns a [LuaRef](LuaRef),
+		which allows further chaining to retrieve nested values:
+		```gml
+		var state = new LuaState();
+		show_debug_message(state.get("math").get("pi")); // 3.14
+		show_debug_message(state.get("string").get("reverse").call("123")); // 321
+		```
+	}
+	#[set(name, value)](-) {
+		Changes a value of a global variable.
+		
+		For example,
+		```gml
+		var state = new LuaState();
+		state.set("game_version", "1.0.0");
+		state.addCode(@'
+			print(game_version) -- "1.0.0"
+		');
+		```
+		
+		If you need to change a value inside an object, you'll want to set() on a LuaRef instead:
+		```gml
+		var state = new LuaState();
+		state.get("math").set("tau", pi * 2)
+		state.addCode(@'
+			print(math.tau) -- 6.2831853071796
+		');
+		```
+	}
+	Calling globals
+	#[call(name, ...args)->](-) {}
+	#[callExt(name, argArray)->](-) {}
+}
+#[GML↔Lua conversions](lua-gml) {
+	#[Conversion rules] {
+		Passing types between GML and Lua converts them as following:
+		--{
+		-	`undefined` ↔ `nil`
+		-	`real` ↔ `number` (floating-point, 64-bit)
+		-	`int64` ↔ `number` (integer, 64-bit)
+		-	`int32` → `number` (integer, 64-bit)
+		-	`string` ↔ `string`
+		-	`LuaTable` ← `table`
+		-	`LuaFunction` ← `function`
+		-	`LuaUserdata` ← `userdata`
+		-	`LuaRef` ← `lightuserdata`
+		-	`array` → `GmlArray`
+		-	`struct` → `GmlStruct`
+		-	`method` → `GmlStruct`
+		-	`instance` → `GmlStruct`
+		}
+		Passing a converted reference type back to where it came from
+		(e.g. passing a `LuaTable` back into the Lua state) will represent
+		it with the original value.
+		
+		Passing a Lua reference type from one state to another currently uses a
+		special kind of `GmlStruct` as a proxy, so get/set/call operations will work,
+		but other metafunctions won't.
+	}
+	#[Lua references in GML](+LuaRef) {
+		Returning a Lua reference-based type (such as a table, function, or userdata) to GML
+		will produce a `LuaRef` struct.
+		
+		It has the following methods:
+		#[toString()->](-) {
+			Returns a short, unique string representation of the value.
+			
+			It'll usually look like this:
+			```text
+			LuaRef(state:000000000474BEF0, uid:100000)
+			```
+		}
+		#[typename()->](-) {
+			Returns what exactly this is, anyway.
+			
+			Possible return values are: --{
+				-	`"table"`
+				-	`"function"`
+				-	`"thread"`
+				-	`"userdata"`
+			}
+		}
+		---
+		The following can be used if the value is a table or a userdata that
+		has a metatable with appropriate metamethods ${seeChap("2.4")}.
+		#[length()->](-) {
+			Returns the length of the table, as per `#table` operator in Lua.
+		}
+		#[get(key)->](-) {
+			Retrieves an item from a table, as with `table[key]` in Lua.
+		}
+		#[set(key, value)->](-) {
+			Stores/changes an item in a table, as with `table[key] = value` in Lua.
+		}
+		---
+		The following can be used if the value is a function or its metatable
+		implements the `__call` metamethod ${seeChap("3.4.10")}.
+		#[call(...args)->](-) {
+			Invokes the value (if it's a function or has a `__call` in its metatable)
+			and returns the result.
+		}
+		#[callMultRet(...args)->array](-) {
+			Like `call`, but returns an array of resulting values ${seeChap("3.3.4")}.
+		}
+		#[callExt(argArray, ?argCount)->]() {
+			Like `call`, but takes arguments as an array.
+			
+			If `argCount` is not provided, it'll be set to length of `argArray`.
+		}
+		#[callExtMultRet(argArray, ?argCount)->array]() {
+			Combines the above two functions,
+			taking arguments as an array and returning results as an array.
+		}
+	}
+	#[GML references in Lua](GmlRef) {
+		#[GmlArray](+) {
+			Implements `__len`, `__index`, and `__newindex` ${seeChap("2.4")}.
+			
+			Pretends to be 1-indexed to save your end user some sanity.
+		}
+		#[GmlStruct](+) {
+			Implements `__index`, `__newindex`, and `__call` ${seeChap("2.4")}.
+			
+			Methods also turn into `GmlStruct` (because they _are_ structs),
+			much like numerous other "structy" new data types.
+		}
+	}
+}
+#[TODOs]() {
+	--{
+	-	Loading from file\
+		Have to change working directory and then change it back,
+		which works a little weird for some things.\
+		And then people reported that you can't `require()` a path with non-Latin glyphs in it,
+		but this somehow works in a few other Lua integrations.
+	-	Lua coroutines\
+		(did anyone actually use these?)
+	-	Multi-returns from GML functions (`lua_return` in v2)\
+		For now you can just return an array and unpack it on Lua side.
+	-	GitHub Actions for cross-platform builds\
+		However, GH Actions do not currently have an ARM Mac target.\
+		Would I have to buy a second, newer Mac Mini just to make ARM extension builds?
+	}
+}
