@@ -19,5 +19,6 @@ if %ERRORLEVEL% EQU 0 (
 	--include "apollo_shared.h"^
 	%projectDir%apollo_init.cpp^
 	%projectDir%apollo_global.cpp^
+	%projectDir%apollo_raw.cpp^
 	%projectDir%Apollo.cpp
 )

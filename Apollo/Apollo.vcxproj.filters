@@ -278,6 +278,9 @@
     <ClCompile Include="apollo_struct_ref.cpp">
       <Filter>Source Files\References</Filter>
     </ClCompile>
+    <ClCompile Include="apollo_raw.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Apollo.rc">

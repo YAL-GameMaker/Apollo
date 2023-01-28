@@ -57,26 +57,21 @@ function lua_gml_ref_set_key(_state, _uid, _key, _value) {
 	} __lua_catch;
 }
 
-function lua_gml_ref_invoke(_state, _uid, _args, _argc) {
+function lua_gml_ref_invoke(_state, _uid, _argArray, _numArgs) {
 	try {
 		var _func = _state.__uid_to_ref[?_uid];
 		if (is_method(_func)) {
 			var _self = method_get_self(_func);
-			if (__apollo_debug_gml_ref) {
-				var _state_ = _state, _uid_ = _uid, _args_ = _args, _argc_ = _argc;
-				var _script = method_get_index(_func);
-				var _script_name = script_get_name(_script);
-			}
 			if (_self != undefined) {
 				with (_self) {
-					return script_execute_ext(method_get_index(_func), _args, 0, _argc);
+					return script_execute_ext(method_get_index(_func), _argArray, 0, _numArgs);
 				}
 				lua_show_error("Bound struct could not be found.");
 				return undefined;
 			}
-			return script_execute_ext(method_get_index(_func), _args, 0, _argc);
+			return script_execute_ext(method_get_index(_func), _argArray, 0, _numArgs);
 		}
-		return script_execute_ext(_func, _args, 0, _argc);
+		return script_execute_ext(_func, _argArray, 0, _numArgs);
 	} __lua_catch;
 }
 
@@ -100,9 +95,9 @@ function lua_gml_cross_ref_set_key(_state, _uid, _key, _value) {
 	} __lua_catch;
 }
 
-function lua_gml_cross_ref_invoke(_state, _uid, _args, _argc) {
+function lua_gml_cross_ref_invoke(_state, _uid, _argArray, _numArgs) {
 	try {
 		var _func = _state.__uid_to_ref[?_uid];
-		return _func.callExt(_args, _argc);
+		return _func.callExt(_argArray, 0, _numArgs);
 	} __lua_catch;
 }

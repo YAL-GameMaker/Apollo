@@ -26,10 +26,13 @@ function LuaState() constructor {
 	/// @param {string} name
 	/// @param ...args
 	static call = function(_name) /*=>*/ {
-		var _argc = argument_count - 1;
-		var _args = array_create(_argc);
-		for (var i = 0; i < _argc; i++) _args[i] = argument[i + 1];
-		return lua_global_call_ext(__ptr__, _name, _args);
+		var _argc = argument_count;
+		var _ptr = __ptr__;
+		lua_stack_push_global(_ptr, _name);
+		for (var i = 1; i < _argc; i++) lua_stack_push(_ptr, argument[i]);
+		return lua_rawcall(_ptr, _argc - 1);
 	}
-	static callExt = function(_name, _arg_array) /*=>*/ {return lua_global_call_ext(__ptr__, _name, _arg_array)};
+	static callExt = function(_name, _argArray, _offset = 0, _numArgs = -1) /*=>*/ {
+		return lua_global_call_ext(__ptr__, _name, _argArray, _offset, _numArgs);
+	}
 }

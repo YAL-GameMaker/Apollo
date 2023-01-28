@@ -242,6 +242,25 @@ struct YYRest {
 	RValue* items;
 	inline RValue operator[] (int ind) const { return items[ind]; }
 	inline RValue& operator[] (int ind) { return items[ind]; }
+	// Ensures that the number does not exceed available items and that passing -1 uses all available items
+	void procCount(int* count) {
+		if (*count < 0 || *count > length) *count = length;
+	}
+	void procCountOffset(int* pCount, int* pOffset) {
+		int offset = *pOffset;
+		if (offset < 0) {
+			*pOffset = offset = 0;
+		} else if (offset > length) {
+			*pOffset = offset = length;
+		}
+		int count = *pCount;
+		if (count < 0) {
+			*pCount = length - offset;
+		} else {
+			int maxCount = length - offset;
+			if (count > maxCount) *pCount = maxCount;
+		}
+	}
 };
 using YYArrayItems = YYRest;
 

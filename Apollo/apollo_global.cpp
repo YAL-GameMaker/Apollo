@@ -18,11 +18,13 @@ dllgm void lua_global_call(YYResult& result, lua_State* L, const char* fname, YY
 	Apollo::popLuaStackValue(&result, L);
 }
 
-dllgm void lua_global_call_ext(YYResult& result, lua_State* L, const char* fname, YYArrayItems args, int argCount = -1) {
+dllgm void lua_global_call_ext(YYResult& result, lua_State* L, const char* fname,
+	YYArrayItems argArray, int offset = 0, int numArgs = -1
+) {
 	lua_getglobal(L, fname);
-	if (argCount < 0 || argCount > args.length) argCount = args.length;
-	for (int i = 0; i < argCount; i++) Apollo::pushGMLtoLuaStack(&args[i], L);
-	dllm_handle_lua_error(lua_pcall(L, argCount, 1, 0));
+	argArray.procCountOffset(&numArgs, &offset);
+	for (int i = offset; i < numArgs; i++) Apollo::pushGMLtoLuaStack(&argArray[i], L);
+	dllm_handle_lua_error(lua_pcall(L, numArgs, 1, 0));
 	Apollo::popLuaStackValue(&result, L);
 }
 
@@ -33,10 +35,12 @@ dllgm void lua_global_call_multret(YYResult& result, lua_State* L, const char* f
 	Apollo::popLuaStackValuesAsArray(&result, L);
 }
 
-dllgm void lua_global_call_ext_multret(YYResult& result, lua_State* L, const char* fname, YYArrayItems args, int argCount = -1) {
+dllgm void lua_global_call_ext_multret(YYResult& result, lua_State* L, const char* fname,
+	YYArrayItems argArray, int offset = 0, int numArgs = -1
+) {
 	lua_getglobal(L, fname);
-	if (argCount < 0 || argCount > args.length) argCount = args.length;
-	for (int i = 0; i < argCount; i++) Apollo::pushGMLtoLuaStack(&args[i], L);
-	dllm_handle_lua_error(lua_pcall(L, args.length, LUA_MULTRET, 0));
+	argArray.procCountOffset(&numArgs, &offset);
+	for (int i = offset; i < numArgs; i++) Apollo::pushGMLtoLuaStack(&argArray[i], L);
+	dllm_handle_lua_error(lua_pcall(L, numArgs, LUA_MULTRET, 0));
 	Apollo::popLuaStackValuesAsArray(&result, L);
 }

@@ -251,6 +251,7 @@
     <ClCompile Include="apollo_init.cpp" />
     <ClCompile Include="apollo_interop.cpp" />
     <ClCompile Include="apollo_lua_ref.cpp" />
+    <ClCompile Include="apollo_raw.cpp" />
     <ClCompile Include="apollo_shared.cpp" />
     <ClCompile Include="apollo_struct_ref.cpp" />
     <ClCompile Include="autogen.cpp" />
