@@ -19,10 +19,18 @@ struct lua_next_error_t {
 extern lua_next_error_t lua_next_error;
 
 namespace Apollo {
-	inline void clearError() {
+	inline void clearNextError() {
 		lua_next_error.hasValue = false;
 	}
-	inline void checkError(lua_State* L) {
+	inline bool hasNextError() {
+		return lua_next_error.hasValue;
+	}
+	inline void throwNextError(lua_State* L) {
+		auto error_text = lua_next_error.pop();
+		lua_pushstring(L, error_text);
+		lua_error(L);
+	}
+	inline void checkNextError(lua_State* L) {
 		auto error_text = lua_next_error.pop();
 		if (error_text) {
 			lua_pushstring(L, error_text);
@@ -38,7 +46,8 @@ namespace Apollo {
 	void luaToGML(RValue* result, lua_State* L, int idx);
 	void popLuaStackValue(RValue* result, lua_State* L);
 	void popLuaStackValuesAsArray(RValue* result, lua_State* L, int count = LUA_MULTRET);
-	void pushGMLtoLuaStack(RValue* value, lua_State* L);
+	void pushGmlValueToLuaStack(RValue* value, lua_State* L);
+	void pushGmlValuesToLuaStack(RValue* values, int count, lua_State* L);
 
 	//
 	void createLuaRef(RValue* result, lua_State* L, int ind);

@@ -141,6 +141,9 @@
     <ClInclude Include="apollo_state.h">
       <Filter>Source Files\Lua</Filter>
     </ClInclude>
+    <ClInclude Include="apollo_lua_ref.lua.h">
+      <Filter>Source Files\References</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">

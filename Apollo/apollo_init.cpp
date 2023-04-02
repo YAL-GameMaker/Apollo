@@ -113,16 +113,19 @@ dllx double apollo_init_2(uint8_t* _c1, uint8_t* _c2) {
 	return -1;
 }
 
-dllgm void apollo_init_3(RValue* script_execute, RValue* defaultSelf, RValue* asset_get_index,
+dllgm void apollo_init_3(RValue* script_execute, RValue* defaultSelf,
+	RValue* asset_get_index, RValue* is_method, RValue* method_get_index,
 	RValue* luaRef, RValue* luaTable, RValue* luaFunction, RValue* luaUserdata
 ) {
 	gml_Func.script_execute = script_execute->getCppFunc();
+	GML::defaultSelf = YYStructGetMember(defaultSelf, "__self__");
+	gml_Func.asset_get_index = asset_get_index->getCppFunc();
+	gml_Func.is_method = is_method->getCppFunc();
+	gml_Func.method_get_index = method_get_index->getCppFunc();
 	gmlClassOf.LuaRef = luaRef->getObjectClass();
 	gmlClassOf.LuaTable = luaTable->getObjectClass();
 	gmlClassOf.LuaFunction = luaFunction->getObjectClass();
 	gmlClassOf.LuaUserdata = luaUserdata->getObjectClass();
-	GML::defaultSelf = YYStructGetMember(defaultSelf, "__self__");
-	gml_Func.asset_get_index = asset_get_index->getCppFunc();
 	gml_Script = {};
 }
 

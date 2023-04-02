@@ -3,6 +3,7 @@
 
 namespace Apollo {
 	ApolloState* getState(lua_State* L) {
+		// TODO: use lua_getextraspace instead?
 		lua_pushstring(L, "apolloState");
 		lua_gettable(L, LUA_REGISTRYINDEX);
 		auto ptr = (ApolloState**)luaL_checkudata(L, -1, "ApolloState");

@@ -42,6 +42,8 @@ apollo_init_3(
 	_fptr(script_execute),
 	_self,
 	_fptr(asset_get_index),
+	_fptr(is_method),
+	_fptr(method_get_index),
 	new LuaRef(undefined, 0),
 	new LuaTable(undefined, 0),
 	new LuaFunction(undefined, 0),

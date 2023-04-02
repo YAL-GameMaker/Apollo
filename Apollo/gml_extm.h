@@ -90,6 +90,9 @@ struct RValue {
 	};
 	uint32_t flags = 0;
 	uint32_t kind = VALUE_REAL;
+	inline int getKind() {
+		return kind & MASK_KIND_RVALUE;
+	}
 
 	inline bool needsFree() {
 		const auto flagSet = (1 << VALUE_STRING) | (1 << VALUE_OBJECT) | (1 << VALUE_ARRAY);
@@ -118,6 +121,15 @@ struct RValue {
 		COPY_RValue(this, value);
 	}
 
+	inline bool getBool(bool defValue = false) {
+		switch (kind & MASK_KIND_RVALUE) {
+			case VALUE_REAL: case VALUE_BOOL: return val != 0;
+			case VALUE_INT32: return v32 != 0;
+			case VALUE_INT64: return v64 != 0;
+			case VALUE_PTR: return ptr != 0;
+			default: return defValue;
+		}
+	}
 	inline int getInt32(int defValue = 0) {
 		switch (kind & MASK_KIND_RVALUE) {
 			case VALUE_REAL: case VALUE_BOOL: return (int)val;

@@ -52,7 +52,7 @@ namespace Apollo {
 		}
 		lua_pop(L, count);
 	}
-	void pushGMLtoLuaStack(RValue* value, lua_State* L) {
+	void pushGmlValueToLuaStack(RValue* value, lua_State* L) {
 		switch (value->kind) {
 			case VALUE_REAL:
 				lua_pushnumber(L, value->val);
@@ -116,5 +116,9 @@ namespace Apollo {
 				lua_pushnil(L);
 				break;
 		}
+	}
+	void pushGmlValuesToLuaStack(RValue* values, int count, lua_State* L) {
+		lua_checkstack(L, count);
+		for (int i = 0; i < count; i++) pushGmlValueToLuaStack(&values[i], L);
 	}
 }

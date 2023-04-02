@@ -34,7 +34,7 @@ namespace Apollo {
 		setupCall(args, L, gml_Script.lua_gml_ref_get_length);
 		GML::script_execute_def_for(result, args, L);
 		args[1].free();
-		Apollo::pushGMLtoLuaStack(&result, L);
+		Apollo::pushGmlValueToLuaStack(&result, L);
 		return 1;
 	}
 	static int __index(lua_State* L) {
@@ -44,7 +44,7 @@ namespace Apollo {
 		GML::script_execute_def_for(result, args, L);
 		args[1].free();
 		args[3].free();
-		Apollo::pushGMLtoLuaStack(&result, L);
+		Apollo::pushGmlValueToLuaStack(&result, L);
 		return 1;
 	}
 	static int __newindex(lua_State* L) {

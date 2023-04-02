@@ -31,7 +31,7 @@ function LuaRef(_state, _uid) constructor {
 		lua_stack_push_global(_ptr, "__apollo_ref_invoke");
 		lua_stack_push(_ptr, __uid__);
 		for (var i = 0; i < _argc; i++) lua_stack_push(_ptr, argument[i]);
-		return lua_rawcall(_ptr, _argc + 1);
+		return lua_raw_call(_ptr, _argc + 1);
 	}
 	/// @param ...args
 	static callMultRet = function() /*=>*/ {
@@ -40,7 +40,7 @@ function LuaRef(_state, _uid) constructor {
 		lua_stack_push_global(_ptr, "__apollo_ref_invoke");
 		lua_stack_push(_ptr, __uid__);
 		for (var i = 0; i < _argc; i++) lua_stack_push(_ptr, argument[i]);
-		return lua_rawcall_multret(_ptr, _argc + 1);
+		return lua_raw_call_multret(_ptr, _argc + 1);
 	}
 	
 	static callExt = function(_argArray, _offset = 0, _numArgs = -1) /*=>*/ {
@@ -48,14 +48,14 @@ function LuaRef(_state, _uid) constructor {
 		lua_stack_push_global(_ptr, "__apollo_ref_invoke");
 		lua_stack_push(_ptr, __uid__);
 		var _argc = 1 + lua_stack_push_ext(_ptr, _argArray, _offset, _numArgs);
-		return lua_rawcall(_ptr,  _argc);
+		return lua_raw_call(_ptr,  _argc);
 	}
 	static callExtMultRet = function(_argArray, _numArgs = -1) /*=>*/ {
 		var _ptr = __state__.__ptr__;
 		lua_stack_push_global(_ptr, "__apollo_ref_invoke");
 		lua_stack_push(_ptr, __uid__);
 		var _argc = 1 + lua_stack_push_ext(_ptr, _argArray, _offset, _numArgs);
-		return lua_rawcall_multret(_ptr, _argc);
+		return lua_raw_call_multret(_ptr, _argc);
 	}
 	
 	static type = function() /*=>*/ {

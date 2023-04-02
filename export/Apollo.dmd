@@ -8,11 +8,18 @@ The extension can be found on
 [itch.io](https://yellowafterlife.itch.io/gamemaker-lua).
 ```
 ```exec
+var helpURL = 'https://www.lua.org/manual/5.4/manual.html';
 function seeChap(_id) {
-	return render('(see [§' + _id + '](https://www.lua.org/manual/5.4/manual.html#' + _id + '))');
+	return render('(see [§' + _id + '](' + helpURL + '#' + _id + '))');
 }
 function seeDoc(_id) {
-	return render('(see [' + _id + '](https://www.lua.org/manual/5.4/manual.html#pdf-' + _id + '))');
+	return render('(see [' + _id + '](' + helpURL + '#' + _id + '))');
+}
+function luaFunc(_name) {
+	return render('*C function:* [`' + _name + '`](' + helpURL + '#' + _name + ')');
+}
+function flatFunc(_name) {
+	return render('*Flat function:* `' + _name + '`');
 }
 
 var svg = File.getContent("thumb-doc-opt.svg");
@@ -24,7 +31,14 @@ return ["<style>.main { ",
 "	background-image: url(data:image/svg+xml;base64," + b64 + ");",
 "}</style>"].join("\n");
 ```
-
+```setmd butMultRet
+but packs multiple returned values into an array ${seeChap("3.3.4")}
+```
+#[Concepts]() {
+	#[Struct API and Flat API](struct-flat) {
+		
+	}
+}
 #[Lua states](+LuaState) {
 	Lua states are now represented as structs!
 	
@@ -40,60 +54,70 @@ return ["<style>.main { ",
 		LuaState(ptr:000000000474BEF0)
 		```
 	}
-	Adding code:
-	#[addCode(code)->](-) {
-		Compiles and executes a snippet of Lua code ${seeDoc("luaL_dostring")}.
-		
-		If the code uses `return` statement, returns the first value.
-		
-		For example, doing
-		```gml
-		var state = new LuaState();
-		state.addCode(@'
-			print("Hello world!");
-		');
-		```
-		would print "Hello world!" into GameMaker's Output panel.
+	#[Adding code](-adding-code) {
+		Adding code:
+		#[addCode(code)->](-) {
+			Compiles and executes a snippet of Lua code ${seeDoc("luaL_dostring")}.
+			
+			If the code uses `return` statement, returns the first value.
+			
+			For example, doing
+			```gml
+			var state = new LuaState();
+			state.addCode(@'
+				print("Hello world!");
+			');
+			```
+			would print "Hello world!" into GameMaker's Output panel.
+		}
+		#[addCodeMultRet(code)->array](-) {
+			Like `addCode`, %[butMultRet].
+		}
 	}
-	#[addCodeMultRet(code)->array](-) {
-		Like `addCode`, but packs multiple returned values into an array ${seeChap("3.3.4")}.
+	#[Global variables](-globals) {
+		Working with globals:
+		#[get(name)->](-) {
+			Retrieves a global variable by a name.
+			
+			For tables and other reference types, this returns a [LuaRef](LuaRef),
+			which allows further chaining to retrieve nested values:
+			```gml
+			var state = new LuaState();
+			show_debug_message(state.get("math").get("pi")); // 3.14
+			show_debug_message(state.get("string").get("reverse").call("123")); // 321
+			```
+			${luaFunc("lua_getglobal")}\
+			${flatFunc("lua_global_get")}
+		}
+		#[set(name, value)](-) {
+			Changes a value of a global variable.
+			
+			For example,
+			```gml
+			var state = new LuaState();
+			state.set("game_version", "1.0.0");
+			state.addCode(@'
+				print(game_version) -- "1.0.0"
+			');
+			```
+			
+			If you need to change a value inside an object, you'll want to set() on a LuaRef instead:
+			```gml
+			var state = new LuaState();
+			state.get("math").set("tau", pi * 2)
+			state.addCode(@'
+				print(math.tau) -- 6.2831853071796
+			');
+			```
+			${flatFunc("lua_global_set")}
+		}
+		#[call(name, ...args)->](-) {
+			${flatFunc("lua_global_call")}
+		}
+		#[callExt(name, argArray)->](-) {
+			${flatFunc("lua_global_call_ext")}
+		}
 	}
-	Working with globals:
-	#[get(name)->](-) {
-		Retrieves a global variable by a name.
-		
-		For tables and other reference types, this returns a [LuaRef](LuaRef),
-		which allows further chaining to retrieve nested values:
-		```gml
-		var state = new LuaState();
-		show_debug_message(state.get("math").get("pi")); // 3.14
-		show_debug_message(state.get("string").get("reverse").call("123")); // 321
-		```
-	}
-	#[set(name, value)](-) {
-		Changes a value of a global variable.
-		
-		For example,
-		```gml
-		var state = new LuaState();
-		state.set("game_version", "1.0.0");
-		state.addCode(@'
-			print(game_version) -- "1.0.0"
-		');
-		```
-		
-		If you need to change a value inside an object, you'll want to set() on a LuaRef instead:
-		```gml
-		var state = new LuaState();
-		state.get("math").set("tau", pi * 2)
-		state.addCode(@'
-			print(math.tau) -- 6.2831853071796
-		');
-		```
-	}
-	Calling globals
-	#[call(name, ...args)->](-) {}
-	#[callExt(name, argArray)->](-) {}
 }
 #[GML↔Lua conversions](lua-gml) {
 	#[Conversion rules] {
@@ -187,6 +211,110 @@ return ["<style>.main { ",
 			
 			Methods also turn into `GmlStruct` (because they _are_ structs),
 			much like numerous other "structy" new data types.
+		}
+	}
+}
+#[Raw API](lua_raw) {
+	#[Stack manipulation](lua_stack) {
+		```setmd stack
+		a state's stack
+		```
+		#[lua_stack_size(state)->]() {
+			Returns the number of elements on %[stack].
+			
+			${luaFunc("lua_gettop")}
+		}
+		#[lua_stack_clear(state)]() {
+			Removes all elements from %[stack].
+			
+			${luaFunc("lua_settop")}
+		}
+		#[lua_stack_discard(state, count)]() {
+			Removes N elements from %[stack].
+			
+			${luaFunc("lua_pop")}
+		}
+		#[lua_stack_resize(state, newSize)]() {
+			Resizes %[stack]. This can discard existing values or push `nil`s to the stack.
+			
+			${luaFunc("lua_settop")}
+		}
+		#[lua_stack_ensure(state, count)->]() {
+			Ensures that %[stack] has space for at least N extra elements.
+			
+			By default, Lua ensures that there's space for 20 extra items on the stack,
+			so you'll want to call this before pushing a large/arbitrary number of elements
+			${seeChap("4.1.1")}.
+			
+			[lua_stack_push]\[\_ext] calls this automatically, but other functions don't.
+			
+			Returns whether the request can be fulfilled.
+			
+			${luaFunc("lua_checkstack")}
+		}
+		---
+		#[lua_stack_get(state, index)->]() {
+			Returns an element of %[stack] at a position.
+			
+			Stack indexes are 1-based (first/bottom element is 1) but you can also use _negative_
+			indexes to work with elements at the top of the stack ${seeChap("4.1")}.
+		}
+		---
+		#[lua_stack_pop(state)->]() {
+			Removes and returns a single value from %[stack].
+		}
+		#[lua_stack_pop_multret(state, count = -1)->]() {
+			Removes and returns a number of values from %[stack] as an array.
+			
+			Use `-1` to pop all stack elements.
+		}
+		---
+		#[lua_stack_push(state, ...values)]() {
+			Pushes one or more values to %[stack].
+		}
+		#[lua_stack_push_ext(state, valArray, offset = 0, count = -1)]() {
+			Pushes one or more values from an array to %[stack].
+			
+			Negative values for `count` will push the remainder of an array (length-offset).
+		}
+		#[lua_stack_push_global(state, name)]() {
+			Pushes a global variable of a state to its stack.
+			
+			${luaFunc("lua_getglobal")}
+		}
+		#[lua_stack_push_new_table(state)]() {
+			Pushes a new, empty table to %[stack].
+			
+			${luaFunc("lua_newtable")}
+		}
+		
+	}
+	#[Calls](lua_raw_calls) {
+		#[lua_raw_call(state, numArgs)->]() {
+			Performs a call with N arguments.
+			The function/value to call precedes the arguments on the stack.
+			
+			For example, when you do `state.call("myfunc", 1, 2, 3)`, what Apollo does is
+			```gml
+			lua_stack_push_global(state);
+			lua_stack_push(state, 1, 2, 3);
+			return lua_raw_call(state, 3);
+			```
+			
+			${luaFunc("lua_pcall")}
+		}
+		#[lua_raw_call_multret(state, numArgs)->]() {
+			Like `lua_raw_call`, %[butMultRet].
+		}
+		#[lua_raw_call_ext(state, numArgs, numResults)->]() {
+			Like `lua_raw_call`, but leaves returned value(s) on the stack.
+			
+			If `numResults` is -1, leaves it up to the function -
+			you can use [lua_stack_size] to find out how many values were returned
+			(and you should remove all of them from the stack afterwards).
+			
+			Otherwise makes sure that there are `numResults` values on the stack,
+			either discarding the extra values or inserting `nil`s for the missing ones.
 		}
 	}
 }

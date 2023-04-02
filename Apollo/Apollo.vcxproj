@@ -202,6 +202,7 @@
     <ClInclude Include="..\Lua\lundump.h" />
     <ClInclude Include="..\Lua\lvm.h" />
     <ClInclude Include="..\Lua\lzio.h" />
+    <ClInclude Include="apollo_lua_ref.lua.h" />
     <ClInclude Include="apollo_shared.h" />
     <ClInclude Include="apollo_state.h" />
     <ClInclude Include="gml_api.h" />

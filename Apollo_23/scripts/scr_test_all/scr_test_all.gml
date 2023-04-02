@@ -5,6 +5,7 @@ function scr_test_all() {
 		scr_test_array_ref,
 		scr_test_struct_ref,
 		scr_test_cross_ref,
+		scr_test_closure,
 	];
 	for (var i = 0; i < array_length(tests); i++) {
 		var test = tests[i];

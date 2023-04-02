@@ -19,6 +19,7 @@
     {"id":{"name":"LuaGmlRef","path":"scripts/LuaGmlRef/LuaGmlRef.yy",},"order":4,},
     {"id":{"name":"scr_test_struct_ref","path":"scripts/scr_test_struct_ref/scr_test_struct_ref.yy",},"order":4,},
     {"id":{"name":"scr_test_cross_ref","path":"scripts/scr_test_cross_ref/scr_test_cross_ref.yy",},"order":5,},
+    {"id":{"name":"scr_test_closure","path":"scripts/scr_test_closure/scr_test_closure.yy",},"order":6,},
   ],
   "Options": [
     {"name":"Amazon Fire","path":"options/amazonfire/options_amazonfire.yy",},

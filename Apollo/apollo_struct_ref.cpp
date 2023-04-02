@@ -45,7 +45,7 @@ namespace Apollo {
 		GML::script_execute_def_for(result, args, L);
 		args[1].free();
 		args[3].free();
-		Apollo::pushGMLtoLuaStack(&result, L);
+		Apollo::pushGmlValueToLuaStack(&result, L);
 		return 1;
 	}
 	static int __newindex(lua_State* L) {
@@ -91,7 +91,7 @@ namespace Apollo {
 		args[1].free();
 		args[3].free();
 
-		Apollo::pushGMLtoLuaStack(&result, L);
+		Apollo::pushGmlValueToLuaStack(&result, L);
 		return 1;
 	}
 	static luaL_Reg metaPairs[] = {
