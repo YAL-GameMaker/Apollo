@@ -2,14 +2,18 @@
 
 Needless to say, this requires basic familiarity with Visual Studio, Command Prompt/PowerShell, and Windows in general.
 
+**Note:** Both GmxGen and GmlCppExtFuncs are already set up in the VS solution
+so these steps are enough - you do not have to follow build-setup instructions
+from the repositories' READMEs.
+
 ### Setting up GmxGen
 
 1. [Install Haxe](https://haxe.org/download/) (make sure to install Neko VM!)
 2. [Download the source code](https://github.com/YAL-GameMaker-Tools/GmxGen/archive/refs/heads/master.zip) 
 (or [check out the git repository](https://github.com/YAL-GameMaker-Tools/GmxGen))
-3. Compile the program: `haxe build.hxml`
+3. Compile the program: `haxe build-neko.hxml`
 4. Create an executable: `nekotools boot bin/GmxGen.n`
-5. Copy `bin/GmxGen.exe` to a folder your PATH (e.g. to Haxe directory )
+5. Copy `bin/GmxGen.exe` to a folder in your PATH (e.g. to the Haxe directory )
 
 ### Setting up GmlCppExtFuncs
 
@@ -18,7 +22,7 @@ Needless to say, this requires basic familiarity with Visual Studio, Command Pro
 (or [check out the git repository](https://github.com/YAL-GameMaker-Tools/GmlCppExtFuncs))
 3. Compile the program: `haxe build.hxml`
 4. Create an executable: `nekotools boot bin/GmlCppExtFuncs.n`
-5. Copy `bin/GmlCppExtFuncs.exe` to a folder your PATH (e.g. to Haxe directory )
+5. Copy `bin/GmlCppExtFuncs.exe` to a folder in your PATH (e.g. to the Haxe directory )
 
 ## Building
 
