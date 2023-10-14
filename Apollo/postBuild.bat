@@ -19,7 +19,7 @@ set docName=%extName%.html
 set docPath=%solutionDir%export\%docName%
 
 echo Copying documentation...
-copy /Y %docPath% %gmlDir23%\datafiles\%docName%
+copy /Y "%docPath%" "%gmlDir23%\datafiles\%docName%"
 
 echo Combining the source files...
 type "%projectDir%*.h" "%projectDir%*.cpp" >"%cppPath%" 2>nul

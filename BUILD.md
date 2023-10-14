@@ -24,10 +24,16 @@ from the repositories' READMEs.
 4. Create an executable: `nekotools boot bin/GmlCppExtFuncs.n`
 5. Copy `bin/GmlCppExtFuncs.exe` to a folder in your PATH (e.g. to the Haxe directory )
 
+---
+
+**Note:** if you've had Visual Studio open while doing this, you'll want to re-open it -
+changes to PATH do not take effect for existing windows.
+
 ## Building
 
-Open the `.sln` in Visual Studio (VS2019 was used as of writing this), compile for x86 - Release and then x64 - Release.
+Open the `.sln` in Visual Studio (VS2019 or VS2022 are both fine - you can change build tools),
+and for x64 - Release.
 
 If you have correctly set up `GmxGen` and `GmlCppExtFuncs`,
 the project will generate the `autogen.gml` files for GML<->C++ interop during pre-build
-and will copy and [re-]link files during post-build.
+and will copy and \[re-]link files during post-build.
