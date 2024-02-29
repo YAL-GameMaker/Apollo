@@ -24,45 +24,39 @@ static bool canAccessMemory(const void* base, size_t size) {
 	#endif
 	return true;
 }
-static int findCScriptRefOffset(uint8_t* _f1, uint8_t* _f2) {
-	auto f1 = (void**)_f1;
-	auto f2 = (void**)_f2;
-	void** fx[] = { f1, f2 };
-	#ifdef _APOLLO_MEMCHECK
-	::MEMORY_BASIC_INFORMATION mbi{};
-	const auto pExec = PAGE_EXECUTE | PAGE_EXECUTE_READ | PAGE_EXECUTE_READWRITE | PAGE_EXECUTE_WRITECOPY;
-	#endif
+
+static int findCScriptRefOffset(void* _fptr_1, void* _fptr_2, void* _mptr_1, void* _mptr_2) {
+	auto f1 = (void**)_fptr_1;
+	auto f2 = (void**)_fptr_2;
+	auto f3 = (void**)_mptr_1;
+	auto f4 = (void**)_mptr_2;
+	void** fx[] = { f1, f2, f3, f4 };
 	for (auto i = 10u; i < 24; i++) {
 		auto step = 0u;
 		for (; step < 2; step++) {
 			auto fi = fx[step];
-			if (!canAccessMemory(fi + i - 1, sizeof(void*) * 3)) return -1;
 
-			// should be NULL, <addr>, NULL
+			// should be NULL, <addr>, NULL:
 			if (fi[i - 1] != nullptr) break;
 			if (fi[i] == nullptr) break;
 			if (fi[i + 1] != nullptr) break;
-			//trace("ind %d step %u: %p %p %p", i, step, *prev, *curr, *next);
-		}
+			// and the method pointers shouldn't have a function in them:
+			auto mi = fx[step + 2];
+			if (mi[i] != nullptr) break;
+}
 		if (step < 2u) continue;
 
 		// destination address must match:
 		auto dest = f1[i];
 		if (dest != f2[i]) continue;
 
-		#ifdef _APOLLO_MEMCHECK
-		// destination address must be executable:
-		if (!VirtualQuery(dest, &mbi, sizeof mbi)) continue;
-		if ((mbi.Protect & pExec) == 0) continue;
-		#endif
-
 		return (int)(sizeof(void*) * i);
 	}
 	return -1;
 }
 
-dllx double apollo_init_1(uint8_t* _f1, uint8_t* _f2) {
-	auto ofs = findCScriptRefOffset(_f1, _f2);
+dllx double apollo_init_1(void* _fptr_1, void* _fptr_2, void* _mptr_1, void* _mptr_2) {
+	auto ofs = findCScriptRefOffset(_fptr_1, _fptr_2, _mptr_1, _mptr_2);
 	if (ofs < 0) return -1;
 	gmlOffsets.CScriptRef.cppFunc = ofs;
 
@@ -71,10 +65,34 @@ dllx double apollo_init_1(uint8_t* _f1, uint8_t* _f2) {
 	// in CWeakRef, the destination pointer is the first non-inherited member.
 	gmlOffsets.CWeakRef.weakRef = ofs - sizeof(void*);
 
-	// hm, nasty! Might want some finer detection mechanism if these change someday
+	// we'll check if it's a 2023.8+ array layout in the function below:
 	gmlOffsets.RefDynamicArrayOfRValue.items = gmlOffsets.CWeakRef.weakRef.offset + sizeof(int) * 2;
 	gmlOffsets.RefDynamicArrayOfRValue.length = gmlOffsets.RefDynamicArrayOfRValue.items.offset + sizeof(void*) + sizeof(int64_t) + sizeof(int);
 	return 1;
+}
+
+dllgm void apollo_init_array(RValue* a2, RValue* a3, RValue* a4) {
+	// at first arrays were a little struct
+	// with introduction of GC, arrays were made into a collectable object, inherting from YYObjectBase
+	// now arrays are a little struct again, and they've got a pointer to YYObjectBase (probably used *only* for GC)
+	// the new layout is like this:
+	/*
+	struct RefDynamicArrayOfRValue {
+		YYObjectBase* gcThing;
+		RValue* items;
+		int64 copyOnWriteStuff;
+		int refCount;
+		int mystery1;
+		int mystery2;
+		int length;
+	}
+	*/
+	FieldOffset<int> magicLength = sizeof(void*) * 2 + sizeof(int64) + sizeof(int) * 3;
+	if (magicLength.read(a2->ptr) == 2 && magicLength.read(a3->ptr) == 3 && magicLength.read(a4->ptr) == 4) {
+		// so if what we've passed seems to be using that layout, 
+		gmlOffsets.RefDynamicArrayOfRValue.items.offset = sizeof(void*);
+		gmlOffsets.RefDynamicArrayOfRValue.length = magicLength;
+	}
 }
 
 constexpr char gml_Script_[] = "gml_Script_";

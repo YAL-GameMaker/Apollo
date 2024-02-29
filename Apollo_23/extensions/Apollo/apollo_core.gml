@@ -18,7 +18,8 @@ var _qptr = method(_ctx, function(_struct) /*=>*/ {
 	array_push(_things, _struct);
 	return ptr(_struct);
 });
-var _result = apollo_init_1(_fptr(is_bool), _fptr(is_bool));
+var _f1 = function() { return 1; };
+var _result = apollo_init_1(_fptr(is_bool), _fptr(is_bool), ptr(_f1), ptr(_f1));
 if (_result == 0) {
 	lua_init_error = "Apollo native extension is not loaded";
 	return false;
@@ -27,6 +28,8 @@ if (_result < 0) {
 	lua_init_error = "Failed to resolve method offset (incompatible runtime?)";
 	return false;
 }
+
+apollo_init_array([1, 2], [3, 4, 5], [6, 7, 8, 9]);
 
 _result = apollo_init_2(_qptr(new LuaState()), _qptr(new LuaState()));
 if (_result <= 0) {

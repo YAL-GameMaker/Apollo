@@ -121,7 +121,7 @@ struct RValue {
 	inline int getInt32(int defValue = 0) {
 		switch (kind & MASK_KIND_RVALUE) {
 			case VALUE_REAL: case VALUE_BOOL: return (int)val;
-			case VALUE_INT32: return v32;
+			case VALUE_INT32: case VALUE_REF: return v32;
 			case VALUE_INT64: return (int)v64;
 			default: return defValue;
 		}
@@ -129,7 +129,7 @@ struct RValue {
 	inline int64_t getInt64(int64_t defValue = 0) {
 		switch (kind & MASK_KIND_RVALUE) {
 			case VALUE_REAL: case VALUE_BOOL: return (int64_t)val;
-			case VALUE_INT32: return v32;
+			case VALUE_INT32: case VALUE_REF: return v32;
 			case VALUE_INT64: return v64;
 			default: return defValue;
 		}

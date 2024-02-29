@@ -57,7 +57,7 @@ namespace Apollo {
 			case VALUE_REAL:
 				lua_pushnumber(L, value->val);
 				break;
-			case VALUE_INT32:
+			case VALUE_INT32: case VALUE_REF:
 				lua_pushinteger(L, value->v32);
 				break;
 			case VALUE_INT64:
